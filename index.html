@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation with Password Activation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            width: 350px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+            background: #f9f9f9;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Form Validation with Password Activation</h2>
+        <input type="text" id="mobileNumber" placeholder="Enter your mobile number" disabled>
+        <input type="email" id="email" placeholder="Enter your email" disabled>
+        <button onclick="activateForm()">Activate Textboxes</button>
+        <button id="submitBtn" onclick="validateForm()" disabled>Submit</button>
+    </div>
+
+    <script>
+        function activateForm() {
+            var passwordInput = prompt("Please enter the password to activate the textboxes:");
+            var correctPassword = "12345"; // Set the correct password here
+            
+            if (passwordInput === correctPassword) {
+                document.getElementById("mobileNumber").disabled = false;
+                document.getElementById("email").disabled = false;
+                document.getElementById("submitBtn").disabled = false;
+                alert("Textboxes activated successfully!");
+            } else {
+                alert("Incorrect password! Try again.");
+            }
+        }
+
+        function validateForm() {
+            var mobileNumber = document.getElementById("mobileNumber").value;
+            var email = document.getElementById("email").value;
+
+            var mobileRegex = /^\d{10}$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!mobileRegex.test(mobileNumber)) {
+                alert("Mobile number is not correct.");
+                return;
+            }
+            
+            if (!emailRegex.test(email)) {
+                alert("Email is not correct.\nEmail must be in the format: user@example.com");
+                return;
+            }
+            
+            if (confirm("Are you sure you want to submit the form?")) {
+                alert("Form submitted successfully!");
+            }
+        }
+    </script>
+</body>
+</html>
